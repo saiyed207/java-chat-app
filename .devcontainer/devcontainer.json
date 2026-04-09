@@ -1,0 +1,26 @@
+{
+  "name": "Android Java Dev",
+  "image": "mcr.microsoft.com/devcontainers/java:17",
+  "features": {
+    "ghcr.io/devcontainers/features/android-sdk:1": {
+      "sdkVersion": "34",
+      "ndkVersion": "26.1.10909125",
+      "buildToolsVersion": "34.0.0"
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "vscjava.vscode-java-pack",
+        "vscjava.vscode-gradle",
+        "ms-vscode.vscode-android",
+        "firebase.firebase-tools"
+      ],
+      "settings": {
+        "java.home": "/usr/lib/jvm/java-17-openjdk-amd64",
+        "android.sdkPath": "/usr/local/android-sdk"
+      }
+    }
+  },
+  "postCreateCommand": "echo 'export ANDROID_HOME=/usr/local/android-sdk' >> ~/.bashrc && echo 'export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools' >> ~/.bashrc"
+}
