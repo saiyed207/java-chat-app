@@ -1,0 +1,24 @@
+{
+  "name": "Android Java Dev",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+  "features": {
+    "ghcr.io/devcontainers/features/java:1": {
+      "version": "17",
+      "installGradle": false
+    }
+  },
+  "postCreateCommand": "bash -c '\n  apt-get update && apt-get install -y wget unzip zip\n  wget https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip -O cmdtools.zip\n  mkdir -p $HOME/android-sdk/cmdline-tools\n  unzip -q cmdtools.zip -d $HOME/android-sdk/cmdline-tools\n  mv $HOME/android-sdk/cmdline-tools/cmdline-tools $HOME/android-sdk/cmdline-tools/latest\n  rm cmdtools.zip\n  export ANDROID_HOME=$HOME/android-sdk\n  export PATH=$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools:$PATH\n  yes | sdkmanager --licenses\n  sdkmanager \"platforms;android-34\" \"build-tools;34.0.0\" \"platform-tools\"\n'",
+  "remoteEnv": {
+    "ANDROID_HOME": "${containerEnv:HOME}/android-sdk",
+    "PATH": "${containerEnv:PATH}:${containerEnv:HOME}/android-sdk/cmdline-tools/latest/bin:${containerEnv:HOME}/android-sdk/platform-tools"
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "vscjava.vscode-java-pack",
+        "gradle.gradle-for-java",
+        "google.android"
+      ]
+    }
+  }
+}
